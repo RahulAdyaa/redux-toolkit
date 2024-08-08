@@ -12,7 +12,7 @@ function Post() {
 
     const userData = useSelector((state)=>state.auth.userData)
 
-    const isAuthor = post && userData? post.userId===userData.$id:false
+    const isAuthor = post && userData? post.userid===userData.$id:false
 
     useEffect(() => {
         if(slug){
@@ -28,7 +28,7 @@ function Post() {
     const deletePost  = ()=>{
         appwriteService.deletePost(post.$id).then((status)=>{
             if(status){
-                appwriteService.delete(post.featuredImage);
+                appwriteService.delete(post.featuredimage);
                 navigate("/")
             }
         });
@@ -40,8 +40,8 @@ function Post() {
                 className=' w-full flex p-2 justify-center relative border rounded-xl mb-4'
                 >
                     <img
-                    src={appwriteService.getFilePreview(post.featuredImage)}
-                    alt={post.title}
+                    src={appwriteService.getFilePreview(post.featuredimage)}
+                    alt={post.Title}
                     className=' object-cover rounded-xl'/>
 
                     {isAuthor && (
@@ -54,10 +54,10 @@ function Post() {
                     )}
                 </div>
                 <div className='w-full mb-6'>
-                    <h1 className='text-2xl font-bold'>{post.title}</h1>
+                    <h1 className='text-2xl font-bold'>{post.Title}</h1>
                     
                     </div> 
-                    <div className='browser-css'>{parse (post.content)}</div>
+                    <div className='browser-css'>{parse(post.content)}</div>
             </Container>
         </div>
     ):null
